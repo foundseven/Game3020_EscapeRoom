@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public float _movementSpeed = 15.0f;
-
     private Rigidbody _rb;
 
-    //public float _verticalInput;
-    //public float _horizontalInput;
+    public float _movementSpeed = 50.0f;
+    public float _jumpForce;
+
+    private bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        
+        isGrounded = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(isGrounded)
+            {
+                Jump();
+            }
+        }
     }
 
     void Move()
@@ -30,5 +41,20 @@ public class PlayerBehaviour : MonoBehaviour
         Vector3 _movement = new Vector3(_horizontalInput, 0.0f, _verticalInput);
         _rb.MovePosition(transform.position + _movement * Time.deltaTime);
 
+    }
+
+    void Jump()
+    {
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        isGrounded = false;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Collision with: " + other.gameObject.name);
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
     }
 }
