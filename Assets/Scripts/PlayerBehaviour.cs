@@ -11,6 +11,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool isGrounded;
 
+    //refs
+    public MainCamera cameraTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         Move();
+        RotatePlayer();
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -35,11 +39,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Move()
     {
+        //get input for wasd
         float _verticalInput = Input.GetAxis("Vertical") * _movementSpeed;
         float _horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed;
 
-        Vector3 _movement = new Vector3(_horizontalInput, 0.0f, _verticalInput);
-        _rb.MovePosition(transform.position + _movement * Time.deltaTime);
+        //creating the movement vec relative to where the plahyer is facing
+        Vector3 forwardMovement = transform.forward * _verticalInput * _movementSpeed;
+        Vector3 rightMovement = transform.right * _horizontalInput * _movementSpeed;
+
+        //mine
+        // Vector3 _movement = new Vector3(_horizontalInput, 0.0f, _verticalInput);
+        Vector3 _movement = (forwardMovement + rightMovement) * Time.deltaTime;
+        _rb.MovePosition(transform.position + _movement);
 
     }
 
@@ -47,6 +58,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         isGrounded = false;
+    }
+    void RotatePlayer()
+    {
+        float cameraYaw = cameraTransform._turn.x;
+        Quaternion newRotation = Quaternion.Euler(0, cameraYaw, 0);
+        _rb.MoveRotation(newRotation);
     }
 
     private void OnCollisionEnter(Collision other)
