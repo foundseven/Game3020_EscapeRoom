@@ -28,12 +28,16 @@ public class PlayerBehaviour : MonoBehaviour
         Move();
         RotatePlayer();
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if(isGrounded)
+        //    {
+        //        Jump();
+        //    }
+        //}
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            if(isGrounded)
-            {
-                Jump();
-            }
+            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
         }
     }
 

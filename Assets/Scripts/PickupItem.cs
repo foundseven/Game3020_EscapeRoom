@@ -9,9 +9,13 @@ public class PickupItem : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("Pickup Item Found");
-            Inventory.Instance.AddPickup();
-            Destroy(gameObject);
+            //tweak this so i can click it
+            if(Input.GetKey(KeyCode.E))
+            {
+                Debug.Log("Pickup Item Found");
+                Inventory.Instance.AddPickup();
+                Destroy(gameObject);
+            }
         }
     }
 }
