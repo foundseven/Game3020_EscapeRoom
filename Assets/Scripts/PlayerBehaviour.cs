@@ -63,7 +63,8 @@ public class PlayerBehaviour : MonoBehaviour
     //fix this similar to movement
     void Jump()
     {
-        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        Vector3 jumpDirection = transform.up * _jumpForce;
+        _rb.AddForce(jumpDirection, ForceMode.Impulse);
         isGrounded = false;
     }
     void RotatePlayer()

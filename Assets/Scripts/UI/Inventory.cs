@@ -30,7 +30,9 @@ public class Inventory : MonoBehaviour
     public void AddPickup()
     {
         _pickupCount++;
-       // _pickupCountCountText.text = "Pickup Items: " + _pickupCount;
+        Debug.Log("Added Pickup to inv.");
+        Debug.Log("Pickups in inv: " + _pickupCount);
+        // _pickupCountCountText.text = "Pickup Items: " + _pickupCount;
         CheckPickup();
 
     }
