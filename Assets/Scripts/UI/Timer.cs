@@ -8,17 +8,30 @@ using TMPro;
 //are collected, pause timer and display results
 public class Timer : MonoBehaviour
 {
-    [SerializeField] TMP_Text _timerText;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    TMP_Text _timerText;
+    private float _elapsedTime = 0f;
+    public bool _isTimerRunning = true;
 
     // Update is called once per frame
     void Update()
     {
-        
+        _elapsedTime += Time.deltaTime;
+
+        int minutes = Mathf.FloorToInt(_elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(_elapsedTime % 60);
+
+        _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void StopTimer()
+    {
+        _isTimerRunning = false;
+    }
+
+    public void ResetTimer()
+    {
+        _elapsedTime = 0f;
+        _isTimerRunning = true;
     }
 }
