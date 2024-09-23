@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [SerializeField]
+    public PickupItem _pickupRef;
+
     private Rigidbody _rb;
 
     public float _movementSpeed = 50.0f;
     public float _jumpForce;
 
     private bool isGrounded;
+    private bool isItemOverlapping = false;
 
     //refs
     public MainCamera cameraTransform;
@@ -27,6 +31,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Move();
         RotatePlayer();
+
+        PickupOverlap();
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -54,6 +60,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
+    //fix this similar to movement
     void Jump()
     {
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
@@ -66,6 +73,22 @@ public class PlayerBehaviour : MonoBehaviour
         _rb.MoveRotation(newRotation);
     }
 
+    void PickupOverlap()
+    {
+        if(isItemOverlapping && Input.GetKey(KeyCode.E))
+        {
+            _pickupRef.DestroyItem();
+        }
+    }
+
+    //works but need it so when i click it and i am in the trigger box
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            isItemOverlapping = true;
+        }
+    }
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Collision with: " + other.gameObject.name);

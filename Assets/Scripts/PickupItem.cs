@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField]
+    public Inventory _inventory;
+
+    public void DestroyItem()
     {
-        if(other.CompareTag("Player"))
-        {
-            //tweak this so i can click it
-            if(Input.GetKey(KeyCode.E))
-            {
-                Debug.Log("Pickup Item Found");
-                Inventory.Instance.AddPickup();
-                Destroy(gameObject);
-            }
-        }
+        Destroy(gameObject);
+        _inventory.AddPickup();
     }
 }
