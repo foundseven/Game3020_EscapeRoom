@@ -9,7 +9,9 @@ public class MainCamera : MonoBehaviour
     public GameObject _player;
     public Vector2 _turn;
 
-     void Start()
+    public float _cameraPitchLimit = 10f;
+
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -18,5 +20,8 @@ public class MainCamera : MonoBehaviour
     {
         _turn.x += Input.GetAxis("Mouse X");
         _turn.y += Input.GetAxis("Mouse Y");
+
+        _turn.y = Mathf.Clamp(_turn.y, -_cameraPitchLimit, _cameraPitchLimit);
+        transform.localRotation = Quaternion.Euler(-_turn.y, 0, 0);
     }
 }

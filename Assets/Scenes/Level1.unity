@@ -7499,6 +7499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 298547801}
   _turn: {x: 0, y: 0}
+  _cameraPitchLimit: 10
 --- !u!81 &1489875887
 AudioListener:
   m_ObjectHideFlags: 0
