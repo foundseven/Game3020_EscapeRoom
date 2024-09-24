@@ -5479,7 +5479,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &1227168884
 BoxCollider:
@@ -5523,6 +5523,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4138920487604306, guid: c8c389183b4f6674092c056742f95067, type: 3}
   m_PrefabInstance: {fileID: 1503535045}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1227168889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227168882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba3582cb240ec84db9e29df2041a3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headPos: {fileID: 1227168887}
 --- !u!1001 &1237301548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7232,6 +7245,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1920312717345398, guid: c8c389183b4f6674092c056742f95067, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1227168883}
+    - targetCorrespondingSourceObject: {fileID: 1920312717345398, guid: c8c389183b4f6674092c056742f95067, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1227168889}
   m_SourcePrefab: {fileID: 100100000, guid: c8c389183b4f6674092c056742f95067, type: 3}
 --- !u!4 &1511040867 stripped
 Transform:
@@ -7549,6 +7565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openRotationOffset: {x: 0, y: -90, z: 0}
   openSpeed: 5
+  lockedByPassword: 0
 --- !u!114 &1546382371
 MonoBehaviour:
   m_ObjectHideFlags: 0

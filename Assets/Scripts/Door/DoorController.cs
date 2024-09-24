@@ -14,6 +14,10 @@ public class DoorController : MonoBehaviour
     private Quaternion closeRotation;
     private Quaternion openRotation;
     private bool isOpening = false;
+
+    public bool lockedByPassword;
+    private bool isUnlocked = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,14 @@ public class DoorController : MonoBehaviour
 
     public void OpenDoor()
     {
-        isOpening = true;
+        if (!lockedByPassword || isUnlocked)
+        {
+            isOpening = true;
+        }
+        else
+        {
+            Debug.Log("The door is locked. You need to enter a password.");
+        }
     }
 
     public void CloseDoor()
@@ -45,4 +56,22 @@ public class DoorController : MonoBehaviour
         transform.rotation = closeRotation;
     }
 
+    public void OpenLockedDoor()
+    {
+        if (lockedByPassword)
+        {
+            Debug.Log("Locked. Enter Password");
+            return;
+        }
+
+        OpenDoor();
+    }
+
+    public void UnlockDoor()
+    {
+        lockedByPassword = false;
+        isUnlocked = true; // This flag ensures that the door won't lock again
+        Debug.Log("Door unlocked!");
+        OpenDoor();
+    }
 }
