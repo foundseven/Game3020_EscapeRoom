@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class KeypadController : MonoBehaviour
 {
     public DoorController door;
+    public Timer timer;
     public string _password;
     public int _passwordLimit;
     public Text _passwordText;
@@ -50,6 +51,7 @@ public class KeypadController : MonoBehaviour
             door.lockedByPassword = false;
 
             _passwordText.color = Color.green;
+            timer.StopTimer();
             StartCoroutine(waitAndClear());
         }
         //if it is wrong change color dont open

@@ -16,17 +16,30 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _elapsedTime += Time.deltaTime;
+        if(_isTimerRunning)
+        {
+            _elapsedTime += Time.deltaTime;
 
-        int minutes = Mathf.FloorToInt(_elapsedTime / 60);
-        int seconds = Mathf.FloorToInt(_elapsedTime % 60);
+            int minutes = Mathf.FloorToInt(_elapsedTime / 60);
+            int seconds = Mathf.FloorToInt(_elapsedTime % 60);
 
-        _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        if(!_isTimerRunning)
+        {
+
+        }
     }
 
     public void StopTimer()
     {
+        UnityEngine.Debug.Log("Stoping Timer");
         _isTimerRunning = false;
+    }
+
+    public void ResumeTimer()
+    {
+        _isTimerRunning = true;
     }
 
     public void ResetTimer()

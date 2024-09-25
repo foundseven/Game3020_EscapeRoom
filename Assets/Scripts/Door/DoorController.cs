@@ -66,12 +66,4 @@ public class DoorController : MonoBehaviour
 
         OpenDoor();
     }
-
-    public void UnlockDoor()
-    {
-        lockedByPassword = false;
-        isUnlocked = true; // This flag ensures that the door won't lock again
-        Debug.Log("Door unlocked!");
-        OpenDoor();
-    }
 }
