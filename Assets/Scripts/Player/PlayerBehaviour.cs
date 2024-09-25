@@ -9,12 +9,22 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Rigidbody _rb;
 
-    public float _movementSpeed = 50.0f;
+    public float _movementSpeed = 10.0f;
     public float _jumpForce;
+    public float groundDrag;
 
     private bool isGrounded;
     private bool isItemOverlapping = false;
+    bool grounded;
 
+    public float playerHeight;
+    public LayerMask whatIsGround;
+
+    float _verticalInput;
+    float _horizontalInput;
+
+    Vector3 moveDirection;
+    public Transform orientation;
     //refs
     public MainCamera cameraTransform;
 
@@ -22,50 +32,80 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        
+        _rb.freezeRotation = true;
         isGrounded = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        //ground check
+        CheckIfGrouded();
+
+        //handle the drag
+        if(grounded)
+        {
+            _rb.drag = groundDrag;
+            UnityEngine.Debug.Log("Is Grounded");
+        }
+        else
+        {
+            UnityEngine.Debug.Log("Is Not Grounded");
+            _rb.drag = 0;
+        }
+
+        MyInput();
+
+        SpeedControl();
+
         RotatePlayer();
 
         PickupOverlap();
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && grounded)
         {
-            if(isGrounded)
-            {
-                Jump();
-            }
+            Jump();
         }
     }
 
-    void Move()
+    private void FixedUpdate()
     {
-        //get input for wasd
-        float _verticalInput = Input.GetAxis("Vertical") * _movementSpeed;
-        float _horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed;
-
-        //creating the movement vec relative to where the plahyer is facing
-        Vector3 forwardMovement = transform.forward * _verticalInput * _movementSpeed;
-        Vector3 rightMovement = transform.right * _horizontalInput * _movementSpeed;
-
-        //mine
-        // Vector3 _movement = new Vector3(_horizontalInput, 0.0f, _verticalInput);
-        Vector3 _movement = (forwardMovement + rightMovement) * Time.deltaTime;
-        _rb.MovePosition(transform.position + _movement);
-
+        Move();
     }
 
-    //fix this similar to movement
+    private void MyInput()
+    {
+        _horizontalInput = Input.GetAxisRaw("Horizontal");
+        _verticalInput = Input.GetAxisRaw("Vertical");
+    }
+    void Move()
+    {
+        moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
+
+        _rb.AddForce(moveDirection.normalized * _movementSpeed, ForceMode.Force);
+    }
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(_rb.velocity.x, 0.0f, _rb.velocity.z);
+
+        //limit the vel if needed
+        if(flatVel.magnitude > _movementSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * _movementSpeed;
+            _rb.velocity = new Vector3(limitedVel.x, _rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    void CheckIfGrouded()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+    }
     void Jump()
     {
         Vector3 jumpDirection = transform.up * _jumpForce;
         _rb.AddForce(jumpDirection, ForceMode.Impulse);
-        isGrounded = false;
+        grounded = false;
     }
     void RotatePlayer()
     {
