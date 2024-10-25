@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Key : MonoBehaviour 
+{
+    public enum Animation 
+    {
+        IDLE,
+        RUNNING,
+        JUMPING
+    }
+}
+
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -28,10 +38,16 @@ public class PlayerBehaviour : MonoBehaviour
     //refs
     public MainCamera cameraTransform;
 
+    //animations
+    private CharacterController _characterController;
+    private Animator _animator;
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _characterController = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
         _rb.freezeRotation = true;
         isGrounded = true;
     }
@@ -66,6 +82,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Jump();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            UnityEngine.Debug.Log("Quitting Game");
+        }
     }
 
     private void FixedUpdate()
@@ -83,6 +104,10 @@ public class PlayerBehaviour : MonoBehaviour
         moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
 
         _rb.AddForce(moveDirection.normalized * _movementSpeed, ForceMode.Force);
+
+        //animation based on movement
+        bool isMoving = _horizontalInput != 0 || _verticalInput != 0;
+        _animator.SetBool("isRunning", isMoving);
     }
 
     private void SpeedControl()
@@ -100,12 +125,21 @@ public class PlayerBehaviour : MonoBehaviour
     void CheckIfGrouded()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        
+        if(grounded) 
+        {
+            _animator.SetBool("isJumping", false);
+        }
     }
     void Jump()
     {
         Vector3 jumpDirection = transform.up * _jumpForce;
         _rb.AddForce(jumpDirection, ForceMode.Impulse);
         grounded = false;
+
+        //anim
+        _animator.SetBool("isJumping", true);
+
     }
     void RotatePlayer()
     {
