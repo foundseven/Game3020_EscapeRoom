@@ -26,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool isGrounded;
     private bool isItemOverlapping = false;
     bool grounded;
+    public bool isInputLocked = false;
 
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -55,6 +56,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isInputLocked) return;
+
         //ground check
         CheckIfGrouded();
 

@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class KeypadController : MonoBehaviour
 {
     public DoorController door;
+
+    [SerializeField]
+    public EndGameUI endGameUI;
+
     public Timer timer;
     public string _password;
     public int _passwordLimit;
@@ -51,7 +55,13 @@ public class KeypadController : MonoBehaviour
             door.lockedByPassword = false;
 
             _passwordText.color = Color.green;
-            timer.StopTimer();
+            timer.StopTimerAndRewardStars();
+
+            float elapsedTime = timer.GetTime();
+            int stars = PointsManager.instance.starsEarned;
+
+            endGameUI.ShowEndGameUI(elapsedTime, stars);
+            Debug.Log("Showing UI");
             StartCoroutine(waitAndClear());
         }
         //if it is wrong change color dont open

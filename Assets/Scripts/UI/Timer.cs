@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField]
     TMP_Text _timerText;
+
     private float _elapsedTime = 0f;
     public bool _isTimerRunning = true;
 
@@ -42,9 +43,22 @@ public class Timer : MonoBehaviour
         _isTimerRunning = true;
     }
 
+    public float GetTime()
+    {
+        return _elapsedTime;
+    }
+
     public void ResetTimer()
     {
         _elapsedTime = 0f;
         _isTimerRunning = true;
+    }
+
+    public void StopTimerAndRewardStars()
+    {
+        StopTimer();
+        float elapsedTiime = GetTime();
+
+        PointsManager.instance.CalculateStars(elapsedTiime);
     }
 }
