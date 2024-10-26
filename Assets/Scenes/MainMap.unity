@@ -1890,6 +1890,7 @@ MonoBehaviour:
   _player: {fileID: 636382115}
   _turn: {x: 0, y: 0}
   _cameraPitchLimit: 15
+  isCameraLocked: 0
 --- !u!81 &526978611
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2468,6 +2469,7 @@ MonoBehaviour:
   _movementSpeed: 30
   _jumpForce: 10
   groundDrag: 1
+  isInputLocked: 0
   playerHeight: 0.5
   whatIsGround:
     serializedVersion: 2
@@ -5855,6 +5857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorController: {fileID: 1546382370}
+  playerBehaviour: {fileID: 636382119}
 --- !u!54 &1546382375
 Rigidbody:
   m_ObjectHideFlags: 0
