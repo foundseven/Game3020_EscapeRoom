@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    [SerializeField] private DoorController doorController;
+    [SerializeField] 
+    private DoorController doorController;
+
+    [SerializeField]
+    PlayerBehaviour playerBehaviour;
 
     private bool playerInTrigger = false;
     private bool doorOpened = false;
@@ -14,7 +18,10 @@ public class DoorTrigger : MonoBehaviour
     {
         if (playerInTrigger && Input.GetKeyDown(KeyCode.Q))
         {
+           playerBehaviour.OpeningDoorAnimation();
            doorController.OpenDoor();
+           playerBehaviour.StopOpeningDoorAnimation();
+
         }
     }
     private void OnTriggerEnter(Collider other)

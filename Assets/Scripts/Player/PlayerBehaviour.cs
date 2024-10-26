@@ -8,7 +8,8 @@ public class Key : MonoBehaviour
     {
         IDLE,
         RUNNING,
-        JUMPING
+        JUMPING,
+        PUSHING
     }
 }
 
@@ -111,6 +112,15 @@ public class PlayerBehaviour : MonoBehaviour
         //animation based on movement
         bool isMoving = _horizontalInput != 0 || _verticalInput != 0;
         _animator.SetBool("isRunning", isMoving);
+    }
+
+    public void OpeningDoorAnimation()
+    {
+        _animator.SetBool("isPushing", true);
+    }
+    public void StopOpeningDoorAnimation()
+    {
+        _animator.SetBool("isPushing", false);
     }
 
     private void SpeedControl()

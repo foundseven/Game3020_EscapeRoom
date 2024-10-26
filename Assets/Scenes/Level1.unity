@@ -2015,6 +2015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorController: {fileID: 817811019}
+  playerBehaviour: {fileID: 669970442}
 --- !u!1001 &834619547
 PrefabInstance:
   m_ObjectHideFlags: 0
