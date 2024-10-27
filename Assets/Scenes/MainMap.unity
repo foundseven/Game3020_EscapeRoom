@@ -7916,7 +7916,19 @@ PrefabInstance:
     - target: {fileID: 253785203991867267, guid: 6981b30d4d8896c4294ecfe42e6f4f40, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 8336714168247129254, guid: 082bd28eeffcf3a4999bb831887f186c, type: 3}
+      objectReference: {fileID: 2100000, guid: 2a1f44ac01dc3f14895dfbfd28c3866d, type: 2}
+    - target: {fileID: 253785203991867267, guid: 6981b30d4d8896c4294ecfe42e6f4f40, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a1f44ac01dc3f14895dfbfd28c3866d, type: 2}
+    - target: {fileID: 253785203991867267, guid: 6981b30d4d8896c4294ecfe42e6f4f40, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a1f44ac01dc3f14895dfbfd28c3866d, type: 2}
+    - target: {fileID: 253785203991867267, guid: 6981b30d4d8896c4294ecfe42e6f4f40, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a1f44ac01dc3f14895dfbfd28c3866d, type: 2}
     - target: {fileID: 3096076514645350272, guid: 6981b30d4d8896c4294ecfe42e6f4f40, type: 3}
       propertyPath: m_Name
       value: PickupItem
