@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
 
     //defining my keys
     private const string CompletedLevelKey = "CompletedLevel_";
-    private const string HighScoreKey = "HighScore";
+    private const string HighScoreKey = "HighScore_";
 
     void Awake()
     {
@@ -66,19 +66,17 @@ public class LevelManager : MonoBehaviour
         return PlayerPrefs.GetInt(CompletedLevelKey + levelName, 0) == 1;
     }
 
-    public void SetHighScore(int score)
+    public void SetHighScore(string levelName, float time)
     {
-        int currentHighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
-
-        if(score > currentHighScore)
+        if(time < GetHighScore(levelName))
         {
-            PlayerPrefs.SetInt(HighScoreKey, score);
+            PlayerPrefs.SetFloat(HighScoreKey + levelName, time);
             PlayerPrefs.Save();
         }
     }
 
-    public int GetHighScore()
+    public float GetHighScore(string levelName)
     {
-        return PlayerPrefs.GetInt(HighScoreKey, 0);
+        return PlayerPrefs.GetFloat(HighScoreKey + levelName, float.MaxValue); // Return max value if no score
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class EndGameUI : MonoBehaviour
@@ -51,6 +52,8 @@ public class EndGameUI : MonoBehaviour
         //display the stars
         _starsText.text = $"Stars Earned: {stars}";
 
+        LevelManager.Instance.SetHighScore(SceneManager.GetActiveScene().name, elapsedTime);
+        Debug.Log("Higscore: " + LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name));
         //pause
         Time.timeScale = 0f;
         Cursor.visible = true;
