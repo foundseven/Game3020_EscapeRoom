@@ -4364,6 +4364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level2
+  requiredLevel: Level1
 --- !u!65 &843521903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5947,6 +5948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level1
+  requiredLevel: 
 --- !u!65 &1323199602
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class KeypadController : MonoBehaviour
     public int _passwordLimit;
     public Text _passwordText;
 
+    public string currentLevelName;
+
     //audio
 
     private void Start()
@@ -62,6 +64,9 @@ public class KeypadController : MonoBehaviour
 
             endGameUI.ShowEndGameUI(elapsedTime, stars);
             Debug.Log("Showing UI");
+
+            LevelManager.Instance.MarkLevelComplete(currentLevelName);
+            Debug.Log("Level " +  currentLevelName + "is completed");
             StartCoroutine(waitAndClear());
         }
         //if it is wrong change color dont open
