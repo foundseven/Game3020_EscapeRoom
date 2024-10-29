@@ -18,6 +18,9 @@ public class EndGameUI : MonoBehaviour
     TMP_Text _starsText;
 
     [SerializeField]
+    TMP_Text _highScoreText;
+
+    [SerializeField]
     Button _continueButton;
 
     public PlayerBehaviour player;
@@ -53,7 +56,18 @@ public class EndGameUI : MonoBehaviour
         _starsText.text = $"Stars Earned: {stars}";
 
         LevelManager.Instance.SetHighScore(SceneManager.GetActiveScene().name, elapsedTime);
-        Debug.Log("Higscore: " + LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name));
+
+        //display the highscore
+        if(LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name) < elapsedTime)
+        {
+            _highScoreText.text = $"HighScore: {LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name)}";
+        }
+        else /*if(elapsedTime < LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name))*/
+        {
+            _highScoreText.text = $"New HighScore: {LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name)}";
+        }
+
+        Debug.Log("Highscore: " + LevelManager.Instance.GetHighScore(SceneManager.GetActiveScene().name));
         //pause
         Time.timeScale = 0f;
         Cursor.visible = true;

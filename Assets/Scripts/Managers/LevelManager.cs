@@ -79,4 +79,23 @@ public class LevelManager : MonoBehaviour
     {
         return PlayerPrefs.GetFloat(HighScoreKey + levelName, float.MaxValue); // Return max value if no score
     }
+
+    public void ResetHighScores(string levelName)
+    {
+        string key = "HighScore_" + levelName;
+
+        if (PlayerPrefs.HasKey(key))
+        {
+            PlayerPrefs.DeleteKey(key);
+            Debug.Log($"High score reset for {levelName}");
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    [ContextMenu("Reset High Scores")]
+    public void ResetHighScoresFromEditor()
+    {
+        ResetHighScores(SceneManager.GetActiveScene().name);
+    }
 }
