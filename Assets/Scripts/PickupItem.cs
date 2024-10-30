@@ -5,12 +5,22 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    [SerializeField]
-    public Inventory _inventory;
+    //[SerializeField]
+    //public Inventory _inventory;
 
-    public void DestroyItem()
+    //public void DestroyItem()
+    //{
+    //    Destroy(gameObject);
+    //    _inventory.AddPickup();
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-        _inventory.AddPickup();
+        if(other.CompareTag("Player") || Input.GetKey(KeyCode.E))
+        {
+            Debug.Log("Interacted with Pickup Item");
+            Inventory.Instance.AddPickup();
+            Destroy(gameObject);
+        }
     }
 }

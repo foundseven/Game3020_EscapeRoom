@@ -13,6 +13,9 @@ public class Inventory : MonoBehaviour
     //[SerializeField] TMP_Text _pickupCountCountText;
 
     public static Inventory Instance;
+
+    public Timer Timer;
+
     public int _pickupCount = 0;
 
     void Awake()
@@ -32,6 +35,10 @@ public class Inventory : MonoBehaviour
         _pickupCount++;
         Debug.Log("Added Pickup to inv.");
         Debug.Log("Pickups in inv: " + _pickupCount);
+
+        //when pickup added, decrease the time
+        Timer.DecreaseTime(5);
+
         // _pickupCountCountText.text = "Pickup Items: " + _pickupCount;
         CheckPickup();
 

@@ -48,6 +48,11 @@ public class Timer : MonoBehaviour
         return _elapsedTime;
     }
 
+    public void DecreaseTime(float decreaseTime)
+    {
+        _elapsedTime -= decreaseTime;
+    }
+
     public void ResetTimer()
     {
         _elapsedTime = 0f;
