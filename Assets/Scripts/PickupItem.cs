@@ -5,22 +5,31 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    //[SerializeField]
-    //public Inventory _inventory;
+    private bool isItemOverlapping = false;
 
-    //public void DestroyItem()
-    //{
-    //    Destroy(gameObject);
-    //    _inventory.AddPickup();
-    //}
-
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if(other.CompareTag("Player") || Input.GetKey(KeyCode.E))
+        if (isItemOverlapping && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Interacted with Pickup Item");
             Inventory.Instance.AddPickup();
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player") )
+        {
+            isItemOverlapping = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isItemOverlapping = false;
         }
     }
 }

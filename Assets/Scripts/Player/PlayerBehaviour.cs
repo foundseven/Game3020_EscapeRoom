@@ -25,7 +25,6 @@ public class PlayerBehaviour : MonoBehaviour
     public float groundDrag;
 
     private bool isGrounded;
-    //private bool isItemOverlapping = false;
     bool grounded;
     public bool isInputLocked = false;
 
@@ -79,8 +78,6 @@ public class PlayerBehaviour : MonoBehaviour
         SpeedControl();
 
         RotatePlayer();
-
-        //PickupOverlap();
 
         if(Input.GetKeyDown(KeyCode.Space) && grounded)
         {
@@ -161,22 +158,6 @@ public class PlayerBehaviour : MonoBehaviour
         _rb.MoveRotation(newRotation);
     }
 
-    //void PickupOverlap()
-    //{
-    //    if(isItemOverlapping && Input.GetKey(KeyCode.E))
-    //    {
-    //        _pickupRef.DestroyItem();
-    //    }
-    //}
-
-    //works but need it so when i click it and i am in the trigger box
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Item"))
-    //    {
-    //        isItemOverlapping = true;
-    //    }
-    //}
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Collision with: " + other.gameObject.name);
