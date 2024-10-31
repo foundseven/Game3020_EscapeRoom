@@ -92,10 +92,29 @@ public class LevelManager : MonoBehaviour
 
         PlayerPrefs.Save();
     }
+    public void ResetCompletedLevels(string levelName)
+    {
+        string key = CompletedLevelKey + levelName;
+
+        if (PlayerPrefs.HasKey(key))
+        {
+            PlayerPrefs.DeleteKey(key);
+            Debug.Log($"Completed level reset for {levelName}");
+        }
+
+        PlayerPrefs.Save();
+    }
 
     [ContextMenu("Reset High Scores")]
     public void ResetHighScoresFromEditor()
     {
         ResetHighScores(SceneManager.GetActiveScene().name);
     }
+
+    [ContextMenu("Reset Completed Levels")]
+    public void ResetCompletedLevelsFromEditor()
+    {
+        ResetCompletedLevels(SceneManager.GetActiveScene().name);
+    }
+
 }

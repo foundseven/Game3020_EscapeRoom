@@ -14,6 +14,7 @@ public class ChangeScene : MonoBehaviour
     {
        LevelManager.Instance.LoadScene(sceneName);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
