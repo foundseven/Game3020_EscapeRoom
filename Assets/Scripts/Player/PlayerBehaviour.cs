@@ -42,6 +42,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     public PauseMenu pauseMenu;
 
+    [SerializeField]
+    AudioClip _walkingSound, _jumpSound;
+
     //animations
     private CharacterController _characterController;
     private Animator _animator;
@@ -118,6 +121,8 @@ public class PlayerBehaviour : MonoBehaviour
         //animation based on movement
         bool isMoving = _horizontalInput != 0 || _verticalInput != 0;
         _animator.SetBool("isRunning", isMoving);
+
+        SoundManager.instance.PlayAudioClip(_walkingSound);
     }
 
     void TogglePause()
@@ -166,6 +171,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         //anim
         _animator.SetBool("isJumping", true);
+
+        SoundManager.instance.PlayAudioClip(_jumpSound);
 
     }
     void RotatePlayer()
