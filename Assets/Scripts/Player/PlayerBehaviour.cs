@@ -39,6 +39,9 @@ public class PlayerBehaviour : MonoBehaviour
     //refs
     public MainCamera cameraTransform;
 
+    [SerializeField]
+    public PauseMenu pauseMenu;
+
     //animations
     private CharacterController _characterController;
     private Animator _animator;
@@ -53,6 +56,10 @@ public class PlayerBehaviour : MonoBehaviour
         isGrounded = true;
     }
 
+    private void Awake()
+    {
+        pauseMenu = GameObject.FindObjectOfType<PauseMenu>(true);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -65,13 +72,15 @@ public class PlayerBehaviour : MonoBehaviour
         if(grounded)
         {
             _rb.drag = groundDrag;
-            UnityEngine.Debug.Log("Is Grounded");
+           // UnityEngine.Debug.Log("Is Grounded");
         }
         else
         {
-            UnityEngine.Debug.Log("Is Not Grounded");
+            //UnityEngine.Debug.Log("Is Not Grounded");
             _rb.drag = 0;
         }
+
+        TogglePause();
 
         MyInput();
 
@@ -109,6 +118,14 @@ public class PlayerBehaviour : MonoBehaviour
         //animation based on movement
         bool isMoving = _horizontalInput != 0 || _verticalInput != 0;
         _animator.SetBool("isRunning", isMoving);
+    }
+
+    void TogglePause()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pauseMenu.TogglePauseMenu();
+        }
     }
 
     public void OpeningDoorAnimation()
