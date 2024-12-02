@@ -32,7 +32,7 @@ public class DoorController : MonoBehaviour
     {
         if (isOpening)
         {
-            Debug.Log("opening door");
+           // Debug.Log("opening door");
             // rotate accordingly
             transform.rotation = Quaternion.RotateTowards(transform.rotation, openRotation, openSpeed + Time.deltaTime);
         }
