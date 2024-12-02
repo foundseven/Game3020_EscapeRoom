@@ -924,7 +924,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -193.6}
+  m_AnchoredPosition: {x: 0, y: -260.4}
   m_SizeDelta: {x: 588.76, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1327542938
@@ -947,7 +947,28 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HOW TO PLAY HERE
+  m_text: 'Rules of the game:
+
+
+    Hello! Welcome to The Great Escape!
+
+
+    The
+    point of the game is to get the code for the door in the fastest time possible.
+
+
+    Core
+    mechanics have been added, with basic functions for inputting a code in order
+    to be able to open the door and get back to the main menu.
+
+
+    *HINT* the code
+    right now is 0000 in order to get out.
+
+
+    Click the numbers into the keypad
+    on the side of the door in level 1 using your left mouse button, push E to enter
+    it.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a761a24591560c043891e364c6b1c1b7, type: 2}
   m_sharedMaterial: {fileID: -791166170727587002, guid: a761a24591560c043891e364c6b1c1b7, type: 2}
@@ -974,8 +995,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.5
-  m_fontSizeBase: 31.5
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1408,7 +1429,28 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HOW TO PLAY HERE
+  m_text: 'Rules of the game:
+
+
+    Hello! Welcome to The Great Escape!
+
+
+    The
+    point of the game is to get the code for the door in the fastest time possible.
+
+
+    Core
+    mechanics have been added, with basic functions for inputting a code in order
+    to be able to open the door and get back to the main menu.
+
+
+    *HINT* the code
+    right now is 0000 in order to get out.
+
+
+    Click the numbers into the keypad
+    on the side of the door in level 1 using your left mouse button, push E to enter
+    it.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a761a24591560c043891e364c6b1c1b7, type: 2}
   m_sharedMaterial: {fileID: -791166170727587002, guid: a761a24591560c043891e364c6b1c1b7, type: 2}
@@ -1435,8 +1477,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.4
-  m_fontSizeBase: 30.4
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

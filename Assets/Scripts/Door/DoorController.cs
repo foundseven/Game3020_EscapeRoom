@@ -10,6 +10,8 @@ public class DoorController : MonoBehaviour
     public Vector3 openRotationOffset = new Vector3(0, -90, 0);
     [SerializeField] 
     public float openSpeed = 5f;
+    [SerializeField]
+    AudioClip _openDoorSound;
 
     private Quaternion closeRotation;
     private Quaternion openRotation;
@@ -32,7 +34,7 @@ public class DoorController : MonoBehaviour
     {
         if (isOpening)
         {
-           // Debug.Log("opening door");
+            // Debug.Log("opening door");
             // rotate accordingly
             transform.rotation = Quaternion.RotateTowards(transform.rotation, openRotation, openSpeed + Time.deltaTime);
         }
@@ -43,6 +45,8 @@ public class DoorController : MonoBehaviour
         if (!lockedByPassword || isUnlocked)
         {
             isOpening = true;
+            SoundManager.instance.PlayAudioClip(_openDoorSound);
+
         }
         else
         {

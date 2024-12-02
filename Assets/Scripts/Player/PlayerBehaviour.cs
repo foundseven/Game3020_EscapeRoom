@@ -43,7 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
     public PauseMenu pauseMenu;
 
     [SerializeField]
-    AudioClip _walkingSound, _jumpSound;
+    AudioClip _walkingSound, _jumpSound, _buttonClick;
 
     //animations
     private CharacterController _characterController;
@@ -121,8 +121,11 @@ public class PlayerBehaviour : MonoBehaviour
         //animation based on movement
         bool isMoving = _horizontalInput != 0 || _verticalInput != 0;
         _animator.SetBool("isRunning", isMoving);
-
-        SoundManager.instance.PlayAudioClip(_walkingSound);
+        if(isMoving ) 
+        {
+           //needs to play once wait play again
+           //SoundManager.instance.PlayAudioClip(_walkingSound);
+        }
     }
 
     void TogglePause()
@@ -130,6 +133,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             pauseMenu.TogglePauseMenu();
+            SoundManager.instance.PlayAudioClip(_buttonClick);
         }
     }
 
