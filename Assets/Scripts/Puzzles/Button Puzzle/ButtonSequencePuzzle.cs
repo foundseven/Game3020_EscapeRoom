@@ -19,6 +19,8 @@ public class ButtonSequencePuzzle : MonoBehaviour
     public float displayDelay = 1.0f;
     private bool isDisplayingSequence = false;
 
+    public PuzzleManager puzzleManager;
+    public PuzzleTrigger puzzleTrigger;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -105,6 +107,8 @@ public class ButtonSequencePuzzle : MonoBehaviour
         cameraPitchRef.isCameraLocked = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        puzzleTrigger.PuzzleCompleted();
+
     }
 
     private IEnumerator DisplayYouWinText()
@@ -119,6 +123,11 @@ public class ButtonSequencePuzzle : MonoBehaviour
         if (puzzleUI != null)
         {
             puzzleUI.SetActive(false);
+        }
+
+        if (puzzleManager != null)
+        {
+            puzzleManager.CompletePuzzle();
         }
     }
 }

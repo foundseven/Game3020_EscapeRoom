@@ -12,6 +12,7 @@ public class PuzzleTrigger : MonoBehaviour
     public GameObject interactionPrompt;
     public GameObject puzzleUI;
     private bool isPlayerInRange = false;
+    private bool isPuzzleCompleted = false;
 
 
     #endregion
@@ -32,7 +33,7 @@ public class PuzzleTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !isPuzzleCompleted)
         {
             ActivatePuzzle();
         }
@@ -40,7 +41,7 @@ public class PuzzleTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")&& !isPuzzleCompleted)
         {
             isPlayerInRange = true;
             if (interactionPrompt != null)
@@ -80,8 +81,12 @@ public class PuzzleTrigger : MonoBehaviour
         cameraPitchRef.isCameraLocked = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        isPuzzleCompleted = false;
         //lock cross hairs too
     }
 
-
+    public void PuzzleCompleted()
+    {
+        isPuzzleCompleted = true;
+    }
 }
