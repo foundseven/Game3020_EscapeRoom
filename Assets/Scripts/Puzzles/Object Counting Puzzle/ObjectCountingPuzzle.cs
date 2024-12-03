@@ -4,34 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class RiddlePuzzle : MonoBehaviour
+public class ObjectCountingPuzzle : MonoBehaviour
 {
     #region Variables
 
-    public TMP_InputField inputField; 
-    public TextMeshProUGUI riddleText; 
-    public TextMeshProUGUI feedbackText; 
-    
+    public TMP_InputField inputField;
+    public TextMeshProUGUI questionText;
+    public TextMeshProUGUI feedbackText;
+
     public PuzzleTrigger puzzleTrigger;
     public PuzzleManager puzzleManager;
     public PlayerBehaviour player;
     public MainCamera cameraPitchRef;
     public GameObject puzzleUI;
-    
-    [SerializeField]
-    public string correctAnswer = "2"; 
 
     [SerializeField]
-    public string riddle = "I am nothing, but without me, everything would be incomplete. What am I?";
+    public string correctAnswer = "3";
+
+    [SerializeField]
+    public string question = "How many cars can be found around the map?";
 
     #endregion
 
-    // Start is called before the first frame update
     void Start()
     {
-        if (riddleText != null)
+        if (questionText != null)
         {
-            riddleText.text = riddle;
+            questionText.text = question;
         }
 
         if (feedbackText != null)
@@ -85,5 +84,16 @@ public class RiddlePuzzle : MonoBehaviour
     {
         feedbackText.text = "Incorrect answer. Try again!";
         feedbackText.color = Color.red;
+    }
+
+    public void EscapeUI()
+    {
+        if (puzzleUI != null)
+        {
+            puzzleUI.SetActive(false);
+        }
+        cameraPitchRef.isCameraLocked = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
