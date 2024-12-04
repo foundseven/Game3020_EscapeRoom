@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PuzzleManager : MonoBehaviour
     public TMP_Text codeDisplay;
     public TMP_Text completedLevelText;
     private int clueIndex = 0;
+
+    [SerializeField]
+    AudioClip _clickSound, _winSound;
 
     #endregion
 
@@ -32,6 +36,16 @@ public class PuzzleManager : MonoBehaviour
                 ShowCodeInputMessage();
             }
         }
+    }
+
+    public void PlayClickSound()
+    {
+        SoundManager.instance.PlayAudioClip(_clickSound);
+    }
+
+    public void PlayWinSound()
+    {
+        SoundManager.instance.PlayAudioClip(_winSound);
     }
 
     public void CompletePuzzle()

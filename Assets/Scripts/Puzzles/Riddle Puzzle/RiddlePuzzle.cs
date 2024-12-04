@@ -42,6 +42,7 @@ public class RiddlePuzzle : MonoBehaviour
 
     public void CheckAnswer()
     {
+        puzzleManager.PlayClickSound();
         if (inputField.text == correctAnswer)
         {
             HandleCorrectAnswer();
@@ -56,6 +57,7 @@ public class RiddlePuzzle : MonoBehaviour
     {
         feedbackText.text = "The correct number is " + correctAnswer;
         feedbackText.color = Color.green;
+        puzzleManager.PlayWinSound();
 
         StartCoroutine(DisplayYouWinText());
 

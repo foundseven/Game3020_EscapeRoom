@@ -18,6 +18,8 @@ public class KeypadController : MonoBehaviour
     public string currentLevelName;
 
     //audio
+    [SerializeField]
+    AudioClip _clickSound;
 
     private void Start()
     {
@@ -54,6 +56,7 @@ public class KeypadController : MonoBehaviour
         //so if it is right change color and open
         if (_passwordText.text == _password)
         {
+            SoundManager.instance.PlayAudioClip(_clickSound);
             door.lockedByPassword = false;
 
             _passwordText.color = Color.green;

@@ -10,6 +10,9 @@ public class PlayerAimming : MonoBehaviour
     public Image crosshairImage;
     public LayerMask aimLayerMask; // To filter the layers the raycast should interact with
 
+    [SerializeField]
+    AudioClip _clickSound;
+
     private void Start()
     {
         // Make sure the crosshair is enabled
@@ -43,6 +46,7 @@ public class PlayerAimming : MonoBehaviour
                 UnityEngine.Debug.Log("Distance check worked");
                 if (Input.GetMouseButtonDown(0))
                 {
+                    SoundManager.instance.PlayAudioClip(_clickSound);
                     UnityEngine.Debug.Log("Mouse click detected on " + hit.transform.name);
                     if (hit.transform.GetComponent<KeypadKey>() != null)
                     {

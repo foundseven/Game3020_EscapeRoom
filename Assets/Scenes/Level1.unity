@@ -3916,6 +3916,8 @@ MonoBehaviour:
   levelCode: 0000
   codeDisplay: {fileID: 1600115798}
   completedLevelText: {fileID: 1789872724}
+  _clickSound: {fileID: 8300000, guid: 25ebd42fae78d1b498f9138c0ac52e9f, type: 3}
+  _winSound: {fileID: 8300000, guid: d3e671f90a08a904bb0b8c70288a7288, type: 3}
 --- !u!4 &661652227
 Transform:
   m_ObjectHideFlags: 0
@@ -3954,6 +3956,7 @@ MonoBehaviour:
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  _clickSound: {fileID: 8300000, guid: a0fc1749712b98f439467d9a2e8ffe6c, type: 3}
 --- !u!54 &669970440
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12067,6 +12070,10 @@ PrefabInstance:
       propertyPath: endGameUI
       value: 
       objectReference: {fileID: 3305474}
+    - target: {fileID: 5270680835268307215, guid: a445d2a0b0fa2a44ba82bba1ed9d8f49, type: 3}
+      propertyPath: _clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d38830cd1d87854e9008d41a78e21f8, type: 3}
     - target: {fileID: 5270680835268307215, guid: a445d2a0b0fa2a44ba82bba1ed9d8f49, type: 3}
       propertyPath: currentLevelName
       value: Level1

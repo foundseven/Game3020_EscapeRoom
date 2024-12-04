@@ -34,6 +34,7 @@ public class ButtonSequencePuzzle : MonoBehaviour
     public void StartPuzzle()
     {
         playerSequence.Clear();
+        puzzleManager.PlayClickSound();
         StartCoroutine(DisplaySequence());
     }
 
@@ -57,7 +58,7 @@ public class ButtonSequencePuzzle : MonoBehaviour
     {
 
         if (isDisplayingSequence) return;
-
+        puzzleManager.PlayClickSound();
         Debug.Log($"Button {buttonID} pressed!");
         playerSequence.Add(buttonID);
         CheckSequence();
@@ -101,6 +102,7 @@ public class ButtonSequencePuzzle : MonoBehaviour
     private void PuzzleComplete()
     {
         Debug.Log("Puzzle complete!");
+        puzzleManager.PlayWinSound();
 
         StartCoroutine(DisplayYouWinText());
 

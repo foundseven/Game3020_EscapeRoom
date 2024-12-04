@@ -89,6 +89,7 @@ public class PatternMatchingPuzzle : MonoBehaviour
     {
         feedbackText.text = "You WIN!";
         feedbackText.color = Color.green;
+        puzzleManager.PlayWinSound();
 
         StartCoroutine(DisplayYouWinText());
 
