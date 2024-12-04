@@ -3,53 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEditor.Experimental.GraphView;
 
 public class PatternMatchingPuzzle : MonoBehaviour
 {
 
     #region Variables
 
-    public List<Image> targetPatternDisplay; // UI for the target pattern
-    public List<int> targetPattern; // Stores the correct sequence (e.g., shape IDs)
+    public List<DropTarget> dropTargets; // List of target outlines
+    public List<DraggableObject> draggableObjects; // List of draggable objects
 
-    private List<int> playerPattern = new List<int>(); // Player's current sequence
-    public List<Button> selectableShapes; // Buttons for player to interact with
+    public TextMeshProUGUI feedbackText;
+    public GameObject puzzleUI; 
 
-    public TextMeshProUGUI feedbackText; // Feedback for the player
-    public GameObject puzzleUI; // Puzzle UI panel
-
-    public PuzzleManager puzzleManager; // PuzzleManager reference
-    public PlayerBehaviour player; // Player reference
-    public MainCamera cameraPitchRef; // Camera lock reference
+    public PuzzleManager puzzleManager;
+    public PlayerBehaviour player; 
+    public MainCamera cameraPitchRef; 
     public PuzzleTrigger puzzleTrigger;
-    public float feedbackDuration = 2f; // How long feedback is displayed
+
+    public float feedbackDuration = 2f;
+    private int totalMatches;
+    private int correctMatches = 0;
+
 
     #endregion
 
-    // Start is called before the first frame update
     void Start()
     {
         if (feedbackText != null)
         {
             feedbackText.text = "";
         }
+
+        totalMatches = dropTargets.Count;
+        Debug.Log($" Drop Target: {dropTargets}  -  Amount: {dropTargets.Count}");
+        foreach (var draggable in draggableObjects)
+        {
+            draggable.OnDropped += HandleObjectDropped;
+        }
     }
 
-    private void SetupTargetPattern()
+    private void HandleObjectDropped(DraggableObject draggable, DropTarget target)
     {
+        Debug.Log($"Draggable: {draggable.name}, Target: {target?.name}");
 
+        if (target.AcceptsObject(draggable))
+        {
+            correctMatches++;
+            feedbackText.text = "Correct match!";
+            feedbackText.color = Color.green;
+
+            draggable.LockPosition();
+            CheckWinCondition();
+        }
+        else
+        {
+            feedbackText.text = "Incorrect match. Try again!";
+            feedbackText.color = Color.red;
+            draggable.ResetPosition();
+        }
     }
-
-    public void OnShapeSelected(int shapeID)
+    private void CheckWinCondition()
     {
-
+        if (correctMatches == totalMatches)
+        {
+            HandleCorrectAnswer();
+        }
     }
-
-    public void CheckPattern()
-    {
-
-    }
-
     private IEnumerator DisplayYouWinText()
     {
         yield return new WaitForSeconds(4.0f);
@@ -75,10 +96,5 @@ public class PatternMatchingPuzzle : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         puzzleTrigger.PuzzleCompleted();
-    }
-
-    private void ResetPlayerPattern()
-    {
-      
     }
 }
